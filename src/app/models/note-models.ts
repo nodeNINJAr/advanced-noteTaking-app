@@ -1,7 +1,8 @@
+import { INotes } from './../interfaces/note-interface';
 import { Schema } from "mongoose";
 
 // schema
-const noteSchema = new Schema({
+const noteSchema = new Schema<INotes>({
       title:{
          type:String,
          required:true,

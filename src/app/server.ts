@@ -1,7 +1,8 @@
 import { Server } from 'http';
-import app from "../src/app"
+import app from './app';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 

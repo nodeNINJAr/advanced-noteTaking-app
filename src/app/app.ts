@@ -1,12 +1,15 @@
 import express, { Application, Request, Response } from "express";
 import noteRoute from "./controllers/note-controllers";
+import { userRoute } from "./controllers/user-controller";
 const app:Application = express();
 
 // middleware
 app.use(express.json());
 
 // 
-app.use('/notes', noteRoute)
+app.use('/notes', noteRoute);
+// users
+app.use('/users', userRoute)
 
 
 
