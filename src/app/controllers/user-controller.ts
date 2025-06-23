@@ -1,26 +1,48 @@
 import express, { Request, Response }  from 'express';
 import { model } from 'mongoose';
 import { userSchema } from '../models/user-model';
+import { z } from 'zod';
   
   
 export const userRoute = express.Router();
+// 
+const CreateUserZodSchema = z.object({
+    firstName:z.string(),
+    lastName:z.string(),
+    age:z.number(),
+    email:z.string(),
+    password:z.string(),
+    role:z.string().optional()
 
+})
+
+// 
 const User = model("User", userSchema)
 //   
   userRoute.post('/create-user', async(req:Request, res:Response) => {
-    const data = req.body;
-  //   methood 1
-  //   const myUser = new User(data)
-  //   await myUser.save();
-  
-  // methood 2
-  const myUser = await User.create(data);
+        
+    try{
+     const data = await CreateUserZodSchema.parseAsync(req.body);
+    //   methood 1
+    //   const myUser = new User(data)
+    //   await myUser.save();
     
-    res.status(201).send({
-        success:true,
-        message:"User created succesfully",
-        user:myUser
-    })
+    // methood 2
+    const myUser = await User.create(data);
+      
+      res.status(201).send({
+          success:true,
+          message:"User created succesfully",
+          user:myUser
+      })
+    }catch(err){
+      console.log(err);
+          res.status(400).json({
+          success:false,
+          message:err.message,
+          err
+      })
+    }
   })
   
   

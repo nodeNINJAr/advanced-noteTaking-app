@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 import { IUser } from "../interfaces/user.interfaces";
+import validator from "validator";
 
 
 export const userSchema =  new Schema<IUser>({
@@ -27,7 +28,14 @@ export const userSchema =  new Schema<IUser>({
       unique:true,
       required:true,
       lowercase:true,
-      trim:true
+      trim:true,
+   //    validate:{
+   //       validator: function(v){
+   //           return /^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(v)
+   //       },
+   //       message:p=>`${p.value} is not a valid email`
+   //    }
+        validate:[validator.isEmail, "Invalid Email {VALUE}"]
    },
    password:{
       type:String,
@@ -37,7 +45,10 @@ export const userSchema =  new Schema<IUser>({
    role:{
        type:String,
        uppercase:true,
-       enum:["USER", "ADMIN","SUPERADMIN"],
+       enum:{
+          values:["USER", "ADMIN","SUPERADMIN"],
+          message:'{VALUE} Is not supported'
+       },
        default:"USER"
    }
 },
