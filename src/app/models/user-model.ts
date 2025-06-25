@@ -1,6 +1,18 @@
 import { Schema } from "mongoose";
-import { IUser } from "../interfaces/user.interfaces";
+import { IAddress, IUser } from "../interfaces/user.interfaces";
 import validator from "validator";
+
+
+
+
+// embeded schema for better type checking
+export const addressSchema= new Schema<IAddress>({
+        city:String,
+        street:String,
+        zip:Number,
+},{
+   _id:false
+})
 
 
 export const userSchema =  new Schema<IUser>({
@@ -50,6 +62,9 @@ export const userSchema =  new Schema<IUser>({
           message:'{VALUE} Is not supported'
        },
        default:"USER"
+   },
+   address:{
+        type:addressSchema
    }
 },
 {

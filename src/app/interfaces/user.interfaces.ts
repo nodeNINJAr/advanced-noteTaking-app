@@ -5,5 +5,17 @@ export interface IUser {
      age:number,
      email:string;
      password:string;
-     role:"USER" | "ADMIN" |  "SUPERADMIN"
+     role:"USER" | "ADMIN" |  "SUPERADMIN";
+     address:{
+        city:string,
+        street:string,
+        zip:number    
+   }
+}
+
+// embeded interface
+export interface IAddress{
+        city:string,
+        street:string,
+        zip:number
 }

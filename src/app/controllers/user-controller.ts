@@ -22,13 +22,13 @@ const User = model("User", userSchema)
   userRoute.post('/create-user', async(req:Request, res:Response) => {
         
     try{
-     const data = await CreateUserZodSchema.parseAsync(req.body);
+    //  const data = await CreateUserZodSchema.parseAsync(req.body);
     //   methood 1
     //   const myUser = new User(data)
     //   await myUser.save();
     
     // methood 2
-    const myUser = await User.create(data);
+    const myUser = await User.create(req.body);
       
       res.status(201).send({
           success:true,
