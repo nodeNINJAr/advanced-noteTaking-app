@@ -19,3 +19,7 @@ export interface IAddress{
         street:string,
         zip:number
 }
+
+export interface UserInstanceMethod {
+    hashPassWord(password:string):string;
+}

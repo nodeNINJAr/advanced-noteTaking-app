@@ -1,7 +1,7 @@
 import express, { Request, Response }  from 'express';
-import { model } from 'mongoose';
-import { userSchema } from '../models/user-model';
 import { z } from 'zod';
+import bcrypt from 'bcryptjs';
+import { User } from '../models/user-model';
   
   
 export const userRoute = express.Router();
@@ -17,18 +17,20 @@ const CreateUserZodSchema = z.object({
 })
 
 // 
-const User = model("User", userSchema)
 //   
   userRoute.post('/create-user', async(req:Request, res:Response) => {
         
     try{
-    //  const data = await CreateUserZodSchema.parseAsync(req.body);
-    //   methood 1
-    //   const myUser = new User(data)
-    //   await myUser.save();
+      // 
+     const data = await CreateUserZodSchema.parseAsync(req.body);
+      // methood 1
+      const myUser = new User(data);
+      const password = await myUser?.hashPassWord(data?.password);
+      myUser.password= password;
+      await myUser.save();
     
     // methood 2
-    const myUser = await User.create(req.body);
+    // const myUser = await User.create(data);
       
       res.status(201).send({
           success:true,

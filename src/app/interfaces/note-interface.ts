@@ -9,5 +9,5 @@ export interface INotes{
         label:string;
         color:string;
      },
-     userId:Types.ObjectId;
+     user:Types.ObjectId;
 }
