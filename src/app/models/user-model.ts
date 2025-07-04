@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { IAddress, IUser } from "../interfaces/user.interfaces";
 import validator from "validator";
 
@@ -15,7 +15,7 @@ export const addressSchema= new Schema<IAddress>({
 })
 
 
-export const userSchema =  new Schema<IUser>({
+const userSchema =  new Schema<IUser>({
    firstName:{
       type:String,
       required:true,
@@ -75,3 +75,4 @@ export const userSchema =  new Schema<IUser>({
 
 )
 
+export const User = model("User", userSchema)

@@ -39,8 +39,9 @@ noteRoute.get('/', async(req:Request, res:Response) => {
 // get single note
 noteRoute.get('/:id', async(req:Request, res:Response) => {
     const {id} = req.params;
-    const note = await Note.findById(id);
-
+    console.log(id);
+    const note = await Note.find().populate("userId");// for fetch all items with all user info
+    console.log(note);
   res.send({
       succes:true,
        message:'one note fetch succesfully',
