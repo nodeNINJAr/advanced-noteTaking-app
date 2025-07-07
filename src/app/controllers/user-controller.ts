@@ -1,6 +1,5 @@
 import express, { Request, Response }  from 'express';
 import { z } from 'zod';
-import bcrypt from 'bcryptjs';
 import { User } from '../models/user-model';
   
   
@@ -25,8 +24,13 @@ const CreateUserZodSchema = z.object({
      const data = await CreateUserZodSchema.parseAsync(req.body);
       // methood 1
       const myUser = new User(data);
-      const password = await myUser?.hashPassWord(data?.password);
-      myUser.password= password;
+      // generic methood
+      // const password = await User.hashPassWord(data?.password)
+      // myUser.password= password;
+
+      // static methood
+     const password = await User.hashPassWord(data?.password);
+        myUser.password= password;
       await myUser.save();
     
     // methood 2
