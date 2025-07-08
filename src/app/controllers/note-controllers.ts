@@ -1,11 +1,11 @@
 import express, { Request, Response }  from 'express';
-import noteSchema from '../models/note-models';
-import { model } from 'mongoose';
+import { Note } from '../models/note-models';
+
 
 // 
 const noteRoute = express.Router()
 // note model
-const Note = model('Note', noteSchema)
+
 
 
 noteRoute.post('/cerate-note', async(req:Request, res:Response) => {

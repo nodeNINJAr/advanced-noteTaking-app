@@ -23,18 +23,18 @@ const CreateUserZodSchema = z.object({
       // 
      const data = await CreateUserZodSchema.parseAsync(req.body);
       // methood 1
-      const myUser = new User(data);
+      // const myUser = new User(data);
       // generic methood
       // const password = await User.hashPassWord(data?.password)
       // myUser.password= password;
 
       // static methood
-     const password = await User.hashPassWord(data?.password);
-        myUser.password= password;
-      await myUser.save();
+    //  const password = await User.hashPassWord(data?.password);
+    //     myUser.password= password;
+      // await myUser.save();
     
     // methood 2
-    // const myUser = await User.create(data);
+    const myUser = await User.create(data);
       
       res.status(201).send({
           success:true,
